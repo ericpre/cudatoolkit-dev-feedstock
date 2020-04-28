@@ -25,7 +25,16 @@ test:
     - numba
     - wget
     - {{ compiler('c') }}
-
+  commands:
+    - nvcc --version
+    - ldconfig -p | grep libcublas
+    - ldconfig -p | grep libcusparse
+    - ldconfig -p | grep libcufft
+    - ldconfig -p | grep libcurand
+    - ldconfig -p | grep libnvvm
+    - ldconfig -p | grep libdevice
+    - numba -s
+    - python _run_test.py
 
 about:
   home: "https://developer.nvidia.com"
